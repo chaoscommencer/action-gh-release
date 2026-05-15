@@ -1,3 +1,337 @@
+## 3.0.0
+
+`3.0.0` is a major release that moves the action runtime from Node 20 to Node 24.
+Use `v3` on GitHub-hosted runners and self-hosted fleets that already support the
+Node 24 Actions runtime. If you still need the last Node 20-compatible line, stay on
+`v2.6.2`.
+
+## What's Changed
+
+### Other Changes 🔄
+
+* Move the action runtime and bundle target to Node 24
+* Update `@types/node` to the Node 24 line and allow future Dependabot updates
+* Keep the floating major tag on `v3`; `v2` remains pinned to the latest `2.x` release
+
+## 2.6.2
+
+## What's Changed
+
+### Other Changes 🔄
+
+* chore(deps): bump picomatch from 4.0.3 to 4.0.4 by @dependabot[bot] in https://github.com/softprops/action-gh-release/pull/775
+* chore(deps): bump brace-expansion from 5.0.4 to 5.0.5 by @dependabot[bot] in https://github.com/softprops/action-gh-release/pull/777
+* chore(deps): bump vite from 8.0.0 to 8.0.5 by @dependabot[bot] in https://github.com/softprops/action-gh-release/pull/781
+
+## 2.6.1
+
+`2.6.1` is a patch release focused on restoring linked discussion thread creation when
+`discussion_category_name` is set. It fixes `#764`, where the draft-first publish flow
+stopped carrying the discussion category through the final publish step.
+
+If you still hit an issue after upgrading, please open a report with the bug template and include a minimal repro or sanitized workflow snippet where possible.
+
+## What's Changed
+
+### Bug fixes 🐛
+
+* fix: preserve discussion category on publish by @chenrui333 in https://github.com/softprops/action-gh-release/pull/765
+
+## 2.6.0
+
+`2.6.0` is a minor release centered on `previous_tag` support for `generate_release_notes`,
+which lets workflows pin GitHub's comparison base explicitly instead of relying on the default range.
+It also includes the recent concurrent asset upload recovery fix, a `working_directory` docs sync,
+a checked-bundle freshness guard for maintainers, and clearer immutable-prerelease guidance where
+GitHub platform behavior imposes constraints on how prerelease asset uploads can be published.
+
+If you still hit an issue after upgrading, please open a report with the bug template and include a minimal repro or sanitized workflow snippet where possible.
+
+## What's Changed
+
+### Exciting New Features 🎉
+
+* feat: support previous_tag for generate_release_notes by @pocesar in https://github.com/softprops/action-gh-release/pull/372
+
+### Bug fixes 🐛
+
+* fix: recover concurrent asset metadata 404s by @chenrui333 in https://github.com/softprops/action-gh-release/pull/760
+
+### Other Changes 🔄
+
+* docs: clarify reused draft release behavior by @chenrui333 in https://github.com/softprops/action-gh-release/pull/759
+* docs: clarify working_directory input by @chenrui333 in https://github.com/softprops/action-gh-release/pull/761
+* ci: verify dist bundle freshness by @chenrui333 in https://github.com/softprops/action-gh-release/pull/762
+* fix: clarify immutable prerelease uploads by @chenrui333 in https://github.com/softprops/action-gh-release/pull/763
+
+## 2.5.3
+
+`2.5.3` is a patch release focused on the remaining path-handling and release-selection bugs uncovered after `2.5.2`.
+It fixes `#639`, `#571`, `#280`, `#614`, `#311`, `#403`, and `#368`.
+It also adds documentation clarifications for `#541`, `#645`, `#542`, `#393`, and `#411`,
+where the current behavior is either usage-sensitive or constrained by GitHub platform limits rather than an action-side runtime bug.
+
+If you still hit an issue after upgrading, please open a report with the bug template and include a minimal repro or sanitized workflow snippet where possible.
+
+## What's Changed
+
+### Bug fixes 🐛
+
+* fix: prefer token input over GITHUB_TOKEN by @chenrui333 in https://github.com/softprops/action-gh-release/pull/751
+* fix: clean up duplicate drafts after canonicalization by @chenrui333 in https://github.com/softprops/action-gh-release/pull/753
+* fix: support Windows-style file globs by @chenrui333 in https://github.com/softprops/action-gh-release/pull/754
+* fix: normalize refs-tag inputs by @chenrui333 in https://github.com/softprops/action-gh-release/pull/755
+* fix: expand tilde file paths by @chenrui333 in https://github.com/softprops/action-gh-release/pull/756
+
+### Other Changes 🔄
+
+* docs: clarify token precedence by @chenrui333 in https://github.com/softprops/action-gh-release/pull/752
+* docs: clarify GitHub release limits by @chenrui333 in https://github.com/softprops/action-gh-release/pull/758
+* documentation clarifications for empty-token handling, `preserve_order`, and special-character asset filename behavior
+
+## 2.5.2
+
+`2.5.2` is a patch release focused on the remaining release-creation and prerelease regressions in the `2.5.x` bug-fix cycle.
+It fixes `#705`, fixes `#708`, fixes `#740`, fixes `#741`, and fixes `#722`.
+Regression testing covers the shared-tag race, prerelease event behavior, dotfile asset labels,
+same-filename concurrent uploads, and blocked-tag cleanup behavior.
+
+If you still hit an issue after upgrading, please open a report with the bug template and include a minimal repro or sanitized workflow snippet where possible.
+
+## What's Changed
+
+### Bug fixes 🐛
+
+* fix: canonicalize releases after concurrent create by @chenrui333 in https://github.com/softprops/action-gh-release/pull/746
+* fix: preserve prereleased events for prereleases by @chenrui333 in https://github.com/softprops/action-gh-release/pull/748
+* fix: restore dotfile asset labels by @chenrui333 in https://github.com/softprops/action-gh-release/pull/749
+* fix: handle upload already_exists races across workflows by @api2062 in https://github.com/softprops/action-gh-release/pull/745
+* fix: clean up orphan drafts when tag creation is blocked by @chenrui333 in https://github.com/softprops/action-gh-release/pull/750
+
+## 2.5.1
+
+`2.5.1` is a patch release focused on regressions introduced in `2.5.0` and on release lookup reliability.
+It fixes `#713`, addresses `#703`, and fixes `#724`. Regression testing shows that
+current `master` no longer reproduces the finalize-race behavior reported in `#704` and `#709`.
+
+## What's Changed
+
+### Bug fixes 🐛
+
+* fix: fetch correct asset URL after finalization; test; some refactoring by @pzhlkj6612 in https://github.com/softprops/action-gh-release/pull/738
+* fix: release marked as 'latest' despite make_latest: false by @Boshen in https://github.com/softprops/action-gh-release/pull/715
+* fix: use getReleaseByTag API instead of iterating all releases by @kim-em in https://github.com/softprops/action-gh-release/pull/725
+
+### Other Changes 🔄
+
+* dependency updates, including the ESM/runtime compatibility refresh in https://github.com/softprops/action-gh-release/pull/731
+
+## 2.5.0
+
+## What's Changed
+
+### Exciting New Features 🎉
+
+* feat: mark release as draft until all artifacts are uploaded by @dumbmoron in https://github.com/softprops/action-gh-release/pull/692
+
+### Other Changes 🔄
+
+* dependency updates
+
+## 2.4.2
+
+## What's Changed
+
+### Exciting New Features 🎉
+
+* feat: Ensure generated release notes cannot be over 125000 characters by @BeryJu in https://github.com/softprops/action-gh-release/pull/684
+
+### Other Changes 🔄
+
+* dependency updates
+
+## 2.4.1
+
+## What's Changed
+
+### Other Changes 🔄
+
+* fix(util): support brace expansion globs containing commas in parseInputFiles by @Copilot in https://github.com/softprops/action-gh-release/pull/672
+* fix: gracefully fallback to body when body_path cannot be read by @Copilot in https://github.com/softprops/action-gh-release/pull/671
+
+## 2.4.0
+
+## What's Changed
+
+### Exciting New Features 🎉
+
+* feat(action): respect working_directory for files globs by @stephenway in https://github.com/softprops/action-gh-release/pull/667
+
+## 2.3.4
+
+## What's Changed
+
+### Bug fixes 🐛
+
+* fix(action): handle 422 already_exists race condition by @stephenway in https://github.com/softprops/action-gh-release/pull/665
+
+### Other Changes 🔄
+
+- dependency updates
+
+## 2.3.3
+
+## What's Changed
+
+### Exciting New Features 🎉
+
+* feat: add input option `overwrite_files` by @asfernandes in https://github.com/softprops/action-gh-release/pull/343
+
+### Other Changes 🔄
+
+- dependency updates
+
+## 2.3.2
+
+* fix: revert fs `readableWebStream` change
+
+## 2.3.1
+
+### Bug fixes 🐛
+
+* fix: fix file closing issue by @WailGree in https://github.com/softprops/action-gh-release/pull/629
+
+## 2.3.0
+
+* Migrate from jest to vitest
+* Replace `mime` with `mime-types`
+* Bump to use node 24
+* Dependency updates
+
+## 2.2.2
+
+## What's Changed
+
+### Bug fixes 🐛
+
+* fix: updating release draft status from true to false by @galargh in https://github.com/softprops/action-gh-release/pull/316
+
+### Other Changes 🔄
+
+* chore: simplify ref_type test by @steinybot in https://github.com/softprops/action-gh-release/pull/598
+* fix(docs): clarify the default for tag_name by @muzimuzhi in https://github.com/softprops/action-gh-release/pull/599
+* test(release): add unit tests when searching for a release by @rwaskiewicz in https://github.com/softprops/action-gh-release/pull/603
+* dependency updates
+
+## 2.2.1
+
+## What's Changed
+
+### Bug fixes 🐛
+
+* fix: big file uploads by @xen0n in https://github.com/softprops/action-gh-release/pull/562
+
+### Other Changes 🔄
+* chore(deps): bump @types/node from 22.10.1 to 22.10.2 by @dependabot in https://github.com/softprops/action-gh-release/pull/559
+* chore(deps): bump @types/node from 22.10.2 to 22.10.5 by @dependabot in https://github.com/softprops/action-gh-release/pull/569
+* chore: update error and warning messages for not matching files in files field by @ytimocin in https://github.com/softprops/action-gh-release/pull/568
+
+## 2.2.0
+
+## What's Changed
+
+### Exciting New Features 🎉
+
+* feat: read the release assets asynchronously by @xen0n in https://github.com/softprops/action-gh-release/pull/552
+
+### Bug fixes 🐛
+
+* fix(docs): clarify the default for tag_name by @alexeagle in https://github.com/softprops/action-gh-release/pull/544
+
+### Other Changes 🔄
+
+* chore(deps): bump typescript from 5.6.3 to 5.7.2 by @dependabot in https://github.com/softprops/action-gh-release/pull/548
+* chore(deps): bump @types/node from 22.9.0 to 22.9.4 by @dependabot in https://github.com/softprops/action-gh-release/pull/547
+* chore(deps): bump cross-spawn from 7.0.3 to 7.0.6 by @dependabot in https://github.com/softprops/action-gh-release/pull/545
+* chore(deps): bump @vercel/ncc from 0.38.2 to 0.38.3 by @dependabot in https://github.com/softprops/action-gh-release/pull/543
+* chore(deps): bump prettier from 3.3.3 to 3.4.1 by @dependabot in https://github.com/softprops/action-gh-release/pull/550
+* chore(deps): bump @types/node from 22.9.4 to 22.10.1 by @dependabot in https://github.com/softprops/action-gh-release/pull/551
+* chore(deps): bump prettier from 3.4.1 to 3.4.2 by @dependabot in https://github.com/softprops/action-gh-release/pull/554
+
+## 2.1.0
+
+## What's Changed
+
+### Exciting New Features 🎉
+* feat: add support for release assets with multiple spaces within the name by @dukhine in https://github.com/softprops/action-gh-release/pull/518
+* feat: preserve upload order by @richarddd in https://github.com/softprops/action-gh-release/pull/500
+
+### Other Changes 🔄
+* chore(deps): bump @types/node from 22.8.2 to 22.8.7 by @dependabot in https://github.com/softprops/action-gh-release/pull/539
+
+## 2.0.9
+
+- maintenance release with updated dependencies
+
+## 2.0.8
+
+### Other Changes 🔄
+* chore(deps): bump prettier from 2.8.0 to 3.3.3 by @dependabot in https://github.com/softprops/action-gh-release/pull/480
+* chore(deps): bump @types/node from 20.14.9 to 20.14.11 by @dependabot in https://github.com/softprops/action-gh-release/pull/483
+* chore(deps): bump @octokit/plugin-throttling from 9.3.0 to 9.3.1 by @dependabot in https://github.com/softprops/action-gh-release/pull/484
+* chore(deps): bump glob from 10.4.2 to 11.0.0 by @dependabot in https://github.com/softprops/action-gh-release/pull/477
+* refactor: write jest config in ts by @chenrui333 in https://github.com/softprops/action-gh-release/pull/485
+* chore(deps): bump @actions/github from 5.1.1 to 6.0.0 by @dependabot in https://github.com/softprops/action-gh-release/pull/470
+
+## 2.0.7
+
+### Bug fixes 🐛
+
+* Fix missing update release body by @FirelightFlagboy in https://github.com/softprops/action-gh-release/pull/365
+
+### Other Changes 🔄
+
+* Bump @octokit/plugin-retry from 4.0.3 to 7.1.1 by @dependabot in https://github.com/softprops/action-gh-release/pull/443
+* Bump typescript from 4.9.5 to 5.5.2 by @dependabot in https://github.com/softprops/action-gh-release/pull/467
+* Bump @types/node from 20.14.6 to 20.14.8 by @dependabot in https://github.com/softprops/action-gh-release/pull/469
+* Bump @types/node from 20.14.8 to 20.14.9 by @dependabot in https://github.com/softprops/action-gh-release/pull/473
+* Bump typescript from 5.5.2 to 5.5.3 by @dependabot in https://github.com/softprops/action-gh-release/pull/472
+* Bump ts-jest from 29.1.5 to 29.2.2 by @dependabot in https://github.com/softprops/action-gh-release/pull/479
+* docs: document that existing releases are updated by @jvanbruegge in https://github.com/softprops/action-gh-release/pull/474
+
+## 2.0.6
+
+- maintenance release with updated dependencies
+
+## 2.0.5
+
+- Factor in file names with spaces when upserting files [#446](https://github.com/softprops/action-gh-release/pull/446) via [@MystiPanda](https://github.com/MystiPanda)
+- Improvements to error handling [#449](https://github.com/softprops/action-gh-release/pull/449) via [@till](https://github.com/till)
+
+## 2.0.4
+
+- Minor follow up to [#417](https://github.com/softprops/action-gh-release/pull/417). [#425](https://github.com/softprops/action-gh-release/pull/425)
+
+## 2.0.3
+
+- Declare `make_latest` as an input field in `action.yml` [#419](https://github.com/softprops/action-gh-release/pull/419)
+
+## 2.0.2
+
+- Revisit approach to [#384](https://github.com/softprops/action-gh-release/pull/384) making unresolved pattern failures opt-in [#417](https://github.com/softprops/action-gh-release/pull/417)
+
+## 2.0.1
+
+- Add support for make_latest property [#304](https://github.com/softprops/action-gh-release/pull/304) via [@samueljseay](https://github.com/samueljseay)
+- Fail run if files setting contains invalid patterns [#384](https://github.com/softprops/action-gh-release/pull/384) via [@rpdelaney](https://github.com/rpdelaney)
+- Add support for proxy env variables (don't use node-fetch) [#386](https://github.com/softprops/action-gh-release/pull/386/) via [@timor-raiman](https://github.com/timor-raiman)
+- Suppress confusing warning when input_files is empty [#389](https://github.com/softprops/action-gh-release/pull/389) via [@Drowze](https://github.com/Drowze)
+
+## 2.0.0
+
+- `2.0.0`!? this release corrects a disjunction between git tag versions used in the marketplace and the versions listed in this file. Previous versions should have really been 1.\*. Going forward this should be better aligned.
+- Upgrade action.yml declaration to node20 to address deprecations
+
 ## 0.1.15
 
 - Upgrade to action.yml declaration to node16 to address deprecations
@@ -6,7 +340,7 @@
 
 ## 0.1.14
 
-- provides an new workflow input option `generate_release_notes` which when set to true will automatically generate release notes for you based on GitHub activity [#179](https://github.com/softprops/action-gh-release/pull/179). Please see the [GitHub docs for this feature](https://docs.github.com/en/repositories/releasing-projects-on-github/automatically-generated-release-notes) for more information
+- provides a new workflow input option `generate_release_notes` which when set to true will automatically generate release notes for you based on GitHub activity [#179](https://github.com/softprops/action-gh-release/pull/179). Please see the [GitHub docs for this feature](https://docs.github.com/en/repositories/releasing-projects-on-github/automatically-generated-release-notes) for more information
 
 ## 0.1.13
 
@@ -14,7 +348,7 @@
 
 ## 0.1.12
 
-- fix bug leading to empty strings subsituted for inputs users don't provide breaking api calls [#144](https://github.com/softprops/action-gh-release/pull/144)
+- fix bug leading to empty strings substituted for inputs users don't provide breaking api calls [#144](https://github.com/softprops/action-gh-release/pull/144)
 
 ## 0.1.11
 
@@ -31,7 +365,7 @@
 ## 0.1.8
 
 - address recent warnings in assert upload api as well as introduce asset upload overrides, allowing for multiple runs for the same release with the same named asserts [#134](https://github.com/softprops/action-gh-release/pull/134)
-- fix backwards compatibility with `GITHUB_TOKEN` resolution. `GITHUB_TOKEN` is no resolved first from an env varibale and then from and input [#133](https://github.com/softprops/action-gh-release/pull/133)
+- fix backwards compatibility with `GITHUB_TOKEN` resolution. `GITHUB_TOKEN` is now resolved first from an env variable and then from an input [#133](https://github.com/softprops/action-gh-release/pull/133)
 - trim white space in provided `tag_name` [#130](https://github.com/softprops/action-gh-release/pull/130)
 
 ## 0.1.7
@@ -44,14 +378,14 @@
 
 This is a release catch up have a hiatus. Future releases will happen more frequently
 
-- Add 'fail_on_unmatched_files' input, useful for catching cases were your `files` input does not actually match what you expect [#55](https://github.com/softprops/action-gh-release/pull/55)
+- Add 'fail_on_unmatched_files' input, useful for catching cases where your `files` input does not actually match what you expect [#55](https://github.com/softprops/action-gh-release/pull/55)
 - Add `repository` input, useful for creating a release in an external repository [#61](https://github.com/softprops/action-gh-release/pull/61)
-- Add release `id` to outputs, useful for refering to release in workflow steps following the step that uses this action [#60](https://github.com/softprops/action-gh-release/pull/60)
+- Add release `id` to outputs, useful for referring to release in workflow steps following the step that uses this action [#60](https://github.com/softprops/action-gh-release/pull/60)
 - Add `upload_url` as action output, useful for managing uploads separately [#75](https://github.com/softprops/action-gh-release/pull/75)
 - Support custom `target_commitish` value, useful to customize the default [#76](https://github.com/softprops/action-gh-release/pull/76)
-- fix `body_path` input first then fall back on `body` input. this was the originally documented precedence but was implemened the the opposite order! [#85](https://github.com/softprops/action-gh-release/pull/85)
+- fix `body_path` input first then fall back on `body` input. This was the originally documented precedence but was implemented in the opposite order! [#85](https://github.com/softprops/action-gh-release/pull/85)
 - Retain original release info if the keys are not set, useful for filling in blanks for a release you've already started separately [#109](https://github.com/softprops/action-gh-release/pull/109)
-- Limit number of times github api request to create a release is retried, useful for avoiding eating up your rate limit and action minutes do to either an invalid token or other circumstance causing the api call to fail [#111](https://github.com/softprops/action-gh-release/pull/111)
+- Limit number of times github api request to create a release is retried, useful for avoiding eating up your rate limit and action minutes due to either an invalid token or other circumstance causing the api call to fail [#111](https://github.com/softprops/action-gh-release/pull/111)
 
 ## 0.1.5
 
@@ -61,7 +395,7 @@ This is a release catch up have a hiatus. Future releases will happen more frequ
 
 - Added support for updating releases body [#36](https://github.com/softprops/action-gh-release/pull/36)
 - Steps can now access the url of releases with the `url` output of this Action [#28](https://github.com/softprops/action-gh-release/pull/28)
-- Added basic GitHub API retry support to manage API turbulance [#26](https://github.com/softprops/action-gh-release/pull/26)
+- Added basic GitHub API retry support to manage API turbulence [#26](https://github.com/softprops/action-gh-release/pull/26)
 
 ## 0.1.3
 
@@ -76,7 +410,7 @@ This is now fixed.
 
 - Add support for newline-delimited asset list [#18](https://github.com/softprops/action-gh-release/pull/18)
 
-GitHub actions inputs don't inherently support lists of things and one might like to append a list of files to include in a release. Previously this was possible using a comma-delimited list of asset path patterns to upload. You can now provide these as a newline delimieted list for better readability
+GitHub actions inputs don't inherently support lists of things and one might like to append a list of files to include in a release. Previously this was possible using a comma-delimited list of asset path patterns to upload. You can now provide these as a newline delimited list for better readability
 
 ```yaml
 - name: Release
